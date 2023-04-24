@@ -16,11 +16,14 @@ app.post("/api/transaction", async (req, res) => {
     const transaction = await TransactionModal.create( { name, price, date, description } );
     res.json(transaction);
 });
+
 app.get('/api/transactions', async (req,res) => {
     await mongoose.connect(process.env.MONGO_URL);
    const  transactions =  await TransactionModal.find();
    res.json(transactions);
 });
-app.listen(5000, () => {
+app.listen(process.env.port || 5000 || 9090, () => {
   console.log("Server is Working!");
 });
+
+export default app;

@@ -22,8 +22,12 @@ app.get('/api/transactions', async (req,res) => {
    const  transactions =  await TransactionModal.find();
    res.json(transactions);
 });
-app.listen(process.env.port || 5000 || 9090, () => {
-  console.log("Server is Working!");
-});
+
+if(process.env.port){
+  app.listen( process.env.port || 5000, () => {
+    console.log("Server is Working!");
+  });
+}
+
 
 export default app;

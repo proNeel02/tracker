@@ -10,23 +10,21 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+mongoose.connect(process.env.MONGO_URL);
+
 app.post("/api/transaction", async (req, res) => {
-   await mongoose.connect(process.env.MONGO_URL);
     const { name, price, date, description } = req.body;
     const transaction = await TransactionModal.create( { name, price, date, description } );
     res.json(transaction);
 });
 
 app.get('/api/transactions', async (req,res) => {
-    await mongoose.connect(process.env.MONGO_URL);
    const  transactions =  await TransactionModal.find();
    res.json(transactions);
 });
-
 if(process.env.port){
-  app.listen( process.env.port || 5000, () => {
+  app.listen( process.env.port, () => {
     console.log("Server is Working!");
   });
 }
-
 export default app;

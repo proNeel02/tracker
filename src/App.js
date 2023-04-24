@@ -16,9 +16,7 @@ function App() {
 
   useEffect(() => {
     const url = `${process.env.REACT_App_API_URL}/transactions`;
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
+    fetch(url).then((response) => response.json()).then((data) => {
         console.log(data);
         setTransactions((transactions) => {
           if (transactions) {
